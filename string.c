@@ -5,7 +5,7 @@
 
 #pragma once
 
-#include "../includes.c"
+#include "./includes.c"
 
 #include "./panic.c"
 
