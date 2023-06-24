@@ -89,9 +89,16 @@ void array_pop(struct Array *self) {
 /**
  * Removes all the elements from the array.
  *
- * @param self The current Array struct.
+ * @param self         The current Array struct.
+ * @param free_element The function to free the elements with.
  */
-void array_clear(struct Array *self) {
+void array_clear(struct Array *self, void(*free_element)(const void *)) {
+	if (free_element) {
+		for (size_t index = 0; index < self->length; index++) {
+			free_element(self->_values[index]);
+		}
+	}
+
 	self->length = 0;
 	array___realloc(self, 1);
 }
