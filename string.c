@@ -169,23 +169,3 @@ char *repeatChr(char chr, size_t length) {
 
 	return string;
 }
-
-/**
- * Convers the char into a string.
- *
- * @param chr The char to convert into a string.
- *
- * @return char* - The repeated string.
- */
-char *chrToString(char chr) {
-	char *string = malloc(2);
-
-	if (!string) {
-		panic("failed to malloc string");
-	}
-
-	string[0] = chr;
-	string[1] = '\0';
-
-	return string;
-}
