@@ -92,7 +92,7 @@ void array_pop(struct Array *self) {
  * @param self         The current Array struct.
  * @param free_element The function to free the elements with.
  */
-void array_clear(struct Array *self, void(*free_element)(const void *)) {
+void array_clear(struct Array *self, void (*free_element)(const void *)) {
 	if (free_element) {
 		for (size_t index = 0; index < self->length; index++) {
 			free_element(self->_values[index]);
