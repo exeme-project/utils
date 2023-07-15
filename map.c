@@ -82,12 +82,12 @@ const void *map_get(struct Map *self, const char *KEY) {
  *
  * @param self The current Map struct.
  */
-void map_free(struct Map *self) {
-	if (self) {
-		array_free(self->_values);
+void map_free(struct Map **self) {
+	if (self && *self) {
+		array_free(&(*self)->_values);
 
-		free(self);
-		self = NULL;
+		free(*self);
+		*self = NULL;
 	} else {
 		panic("Map struct has already been freed");
 	}

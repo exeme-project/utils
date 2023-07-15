@@ -146,12 +146,12 @@ bool array_find(struct Array *self, bool (*matcher)(const void *, const void *),
  *
  * @param self The current Array struct.
  */
-void array_free(struct Array *self) {
-	if (self) {
-		free(self->_values);
+void array_free(struct Array **self) {
+	if (self && *self) {
+		free((*self)->_values);
 
-		free(self);
-		self = NULL;
+		free(*self);
+		*self = NULL;
 	} else {
 		panic("Array struct has already been freed");
 	}
