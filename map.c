@@ -71,7 +71,7 @@ void map_set(struct Map *self, const char *KEY, void *VALUE) {
  * @param self  The current Map struct.
  * @param KEY   The key to calculate the hash for.
  *
- * @return The retreived element.
+ * @return The retrieved element.
  */
 const void *map_get(struct Map *self, const char *KEY) {
 	return array_get(self->_values, map___hash(KEY));

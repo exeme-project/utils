@@ -109,7 +109,7 @@ void array_clear(struct Array *self, void (*free_element)(const void *)) {
  * @param self  The current Array struct.
  * @param index The index from which to get the element.
  *
- * @return The retreived element.
+ * @return The retrieved element.
  */
 const void *array_get(struct Array *self, size_t index) {
 	if (index + 1 > self->length) {
