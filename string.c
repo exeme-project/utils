@@ -115,7 +115,7 @@ void string_free(struct String **self) {
  *
  * @param argumentsNumber The amount of strings to concatenate.
  *
- * @return char* - The concatenated string.
+ * @return The concatenated string.
  */
 char *stringConcatenate(size_t argumentsNumber, ...) {
 	char *string;
@@ -152,7 +152,7 @@ char *stringConcatenate(size_t argumentsNumber, ...) {
  * @param chr    The char to repeat.
  * @param length The amount of times to repeat the char.
  *
- * @return char* - The repeated string.
+ * @return The repeated string.
  */
 char *repeatChr(char chr, size_t length) {
 	char *string = malloc(length + 1);

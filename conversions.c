@@ -14,7 +14,7 @@
  *
  * @param chr The char to convert into a string.
  *
- * @return char* - The repeated string.
+ * @return The repeated string.
  */
 char *chrToString(char chr) {
 	char *string = malloc(2);
@@ -34,7 +34,7 @@ char *chrToString(char chr) {
  *
  * @param num The unsigned long to convert into a string.
  *
- * @return char* - The converted string.
+ * @return The converted string.
  */
 char *ulToString(size_t num) {
 	size_t length = (size_t)snprintf(NULL, 0, "%zu", num);
