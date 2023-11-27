@@ -13,8 +13,8 @@
  * Represents an array.
  */
 struct Array {
-	size_t length;
-	const void **_values;
+    size_t length;
+    const void **_values;
 };
 
 #define ARRAY_STRUCT_SIZE sizeof(struct Array)
@@ -26,16 +26,16 @@ struct Array {
  * @return The created Array struct.
  */
 struct Array *array_new(void) {
-	struct Array *self = malloc(ARRAY_STRUCT_SIZE);
+    struct Array *self = malloc(ARRAY_STRUCT_SIZE);
 
-	if (!self) {
-		panic("failed to malloc Array struct");
-	}
+    if (!self) {
+        panic("failed to malloc Array struct");
+    }
 
-	self->length = 0;
-	self->_values = malloc(1);
+    self->length = 0;
+    self->_values = malloc(1);
 
-	return self;
+    return self;
 }
 
 /**
@@ -45,11 +45,11 @@ struct Array *array_new(void) {
  * @param size The new size of the array.
  */
 void array___realloc(struct Array *self, size_t size) {
-	self->_values = realloc(self->_values, size);
+    self->_values = realloc(self->_values, size);
 
-	if (!self->_values) {
-		panic("failed to realloc array");
-	}
+    if (!self->_values) {
+        panic("failed to realloc array");
+    }
 }
 
 /**
@@ -61,12 +61,12 @@ void array___realloc(struct Array *self, size_t size) {
  * @param value The value to insert.
  */
 void array_insert(struct Array *self, size_t index, const void *value) {
-	if (index + 1 > self->length) {
-		array___realloc(self, (index + 1) * ARRAY_STRUCT_ELEMENT_SIZE);
-		self->length = index + 1;
-	}
+    if (index + 1 > self->length) {
+        array___realloc(self, (index + 1) * ARRAY_STRUCT_ELEMENT_SIZE);
+        self->length = index + 1;
+    }
 
-	self->_values[index] = value;
+    self->_values[index] = value;
 }
 
 /**
@@ -75,15 +75,15 @@ void array_insert(struct Array *self, size_t index, const void *value) {
  * @param self The current Array struct.
  */
 void array_pop(struct Array *self) {
-	if (self->length < 1) {
-		panic("nothing to pop from array");
-	} else if (self->length == 1) {
-		self->length = 0;
-		array___realloc(self, 1);
-	} else {
-		self->length--;
-		array___realloc(self, self->length * ARRAY_STRUCT_ELEMENT_SIZE);
-	}
+    if (self->length < 1) {
+        panic("nothing to pop from array");
+    } else if (self->length == 1) {
+        self->length = 0;
+        array___realloc(self, 1);
+    } else {
+        self->length--;
+        array___realloc(self, self->length * ARRAY_STRUCT_ELEMENT_SIZE);
+    }
 }
 
 /**
@@ -93,14 +93,14 @@ void array_pop(struct Array *self) {
  * @param free_element The function to free the elements with.
  */
 void array_clear(struct Array *self, void (*free_element)(const void *)) {
-	if (free_element) {
-		for (size_t index = 0; index < self->length; index++) {
-			free_element(self->_values[index]);
-		}
-	}
+    if (free_element) {
+        for (size_t index = 0; index < self->length; index++) {
+            free_element(self->_values[index]);
+        }
+    }
 
-	self->length = 0;
-	array___realloc(self, 1);
+    self->length = 0;
+    array___realloc(self, 1);
 }
 
 /**
@@ -112,11 +112,11 @@ void array_clear(struct Array *self, void (*free_element)(const void *)) {
  * @return The retrieved element.
  */
 const void *array_get(struct Array *self, size_t index) {
-	if (index + 1 > self->length) {
-		panic("array get index out of bounds");
-	}
+    if (index + 1 > self->length) {
+        panic("array get index out of bounds");
+    }
 
-	return self->_values[index];
+    return self->_values[index];
 }
 
 /**
@@ -128,17 +128,16 @@ const void *array_get(struct Array *self, size_t index) {
  *
  * @return If a match was found.
  */
-bool array_find(struct Array *self, bool (*matcher)(const void *, const void *),
-				void *match) {
-	for (size_t index = 0; index < self->length; index++) {
-		const void *element = self->_values[index];
+bool array_find(struct Array *self, bool (*matcher)(const void *, const void *), void *match) {
+    for (size_t index = 0; index < self->length; index++) {
+        const void *element = self->_values[index];
 
-		if (matcher(element, match)) {
-			return true;
-		}
-	}
+        if (matcher(element, match)) {
+            return true;
+        }
+    }
 
-	return false;
+    return false;
 }
 
 /**
@@ -147,12 +146,12 @@ bool array_find(struct Array *self, bool (*matcher)(const void *, const void *),
  * @param self The current Array struct.
  */
 void array_free(struct Array **self) {
-	if (self && *self) {
-		free((*self)->_values);
+    if (self && *self) {
+        free((*self)->_values);
 
-		free(*self);
-		*self = NULL;
-	} else {
-		panic("Array struct has already been freed");
-	}
+        free(*self);
+        *self = NULL;
+    } else {
+        panic("Array struct has already been freed");
+    }
 }

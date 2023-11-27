@@ -14,7 +14,7 @@
  * Represents a map.
  */
 struct Map {
-	struct Array *_values;
+    struct Array *_values;
 };
 
 #define MAP_STRUCT_SIZE sizeof(struct Map)
@@ -25,15 +25,15 @@ struct Map {
  * @return The created Map struct.
  */
 struct Map *map_new(void) {
-	struct Map *self = malloc(MAP_STRUCT_SIZE);
+    struct Map *self = malloc(MAP_STRUCT_SIZE);
 
-	if (!self) {
-		panic("failed to malloc Map struct");
-	}
+    if (!self) {
+        panic("failed to malloc Map struct");
+    }
 
-	self->_values = array_new();
+    self->_values = array_new();
 
-	return self;
+    return self;
 }
 
 /**
@@ -44,14 +44,14 @@ struct Map *map_new(void) {
  * @return The calculated hash.
  */
 size_t map___hash(const char *KEY) {
-	size_t hash = 5381;
-	int chr;
+    size_t hash = 5381;
+    int chr;
 
-	while ((chr = *KEY++)) {
-		hash = ((hash << 5) + hash) + (size_t)chr; /* hash * 33 + c */
-	}
+    while ((chr = *KEY++)) {
+        hash = ((hash << 5) + hash) + (size_t)chr; /* hash * 33 + c */
+    }
 
-	return hash;
+    return hash;
 }
 
 /**
@@ -61,9 +61,7 @@ size_t map___hash(const char *KEY) {
  * @param KEY   The key to calculate the hash for.
  * @param VALUE The value to insert.
  */
-void map_set(struct Map *self, const char *KEY, void *VALUE) {
-	array_insert(self->_values, map___hash(KEY), VALUE);
-}
+void map_set(struct Map *self, const char *KEY, void *VALUE) { array_insert(self->_values, map___hash(KEY), VALUE); }
 
 /**
  * Calculates the hash of the key and and returns the element at that index.
@@ -73,9 +71,7 @@ void map_set(struct Map *self, const char *KEY, void *VALUE) {
  *
  * @return The retrieved element.
  */
-const void *map_get(struct Map *self, const char *KEY) {
-	return array_get(self->_values, map___hash(KEY));
-}
+const void *map_get(struct Map *self, const char *KEY) { return array_get(self->_values, map___hash(KEY)); }
 
 /**
  * Frees an Map struct.
@@ -83,12 +79,12 @@ const void *map_get(struct Map *self, const char *KEY) {
  * @param self The current Map struct.
  */
 void map_free(struct Map **self) {
-	if (self && *self) {
-		array_free(&(*self)->_values);
+    if (self && *self) {
+        array_free(&(*self)->_values);
 
-		free(*self);
-		*self = NULL;
-	} else {
-		panic("Map struct has already been freed");
-	}
+        free(*self);
+        *self = NULL;
+    } else {
+        panic("Map struct has already been freed");
+    }
 }
